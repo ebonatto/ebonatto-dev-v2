@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduardo Bonatto — Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { 'teal-custom': '#64ffda' },
+          fontFamily: { inter: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      font-feature-settings: "ss03", "cv02", "cv11";
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748b;
+      transition: color 0.2s;
+    }
+
+    .nav-link::before {
+      content: '';
+      display: block;
+      height: 0;
+      border-top: 1px solid #64748b;
+      width: 2rem;
+      transition: width 0.3s ease, border-color 0.2s;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #e2e8f0;
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+      width: 4rem;
+      border-color: #e2e8f0;
+    }
+
+    .card {
+      position: relative;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+    }
+
+    .card:hover {
+      background-color: rgba(30, 41, 59, 0.5);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      background-color: rgba(100, 255, 218, 0.1);
+      color: #64ffda;
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 1.5rem;
+    }
+
+    .gh-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.7rem;
+      color: #64748b;
+      transition: color 0.2s;
+      margin-top: 0.25rem;
+    }
+
+    .gh-link:hover {
+      color: #64ffda;
+    }
+
+    /* ── Smooth theme transition ───────────────────────────────────────── */
+    body,
+    aside,
+    main,
+    h1,
+    h2,
+    h3,
+    p,
+    a,
+    span,
+    nav,
+    footer,
+    div {
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    /* Override Tailwind transition-colors (150ms) on links so they sync with the 250ms theme transition */
+    a {
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+    }
+
+    /* ── Light theme overrides ─────────────────────────────────────────── */
+    [data-theme="light"] body {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+
+    /* Headings & bright text */
+    [data-theme="light"] .text-slate-200 {
+      color: #0f172a !important;
+    }
+
+    [data-theme="light"] .text-slate-300 {
+      color: #334155 !important;
+    }
+
+    [data-theme="light"] .text-slate-400 {
+      color: #475569 !important;
+    }
+
+    [data-theme="light"] .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+
+    [data-theme="light"] .text-slate-600 {
+      color: #94a3b8 !important;
+    }
+
+    /* Hover: icons & links */
+    [data-theme="light"] .hover\:text-slate-200:hover {
+      color: #0f172a !important;
+    }
+
+    [data-theme="light"] .hover\:text-teal-custom:hover {
+      color: #0d9488 !important;
+    }
+
+    /* Accent teal → darker teal for light bg contrast */
+    [data-theme="light"] .text-teal-custom {
+      color: #0d9488 !important;
+    }
+
+    /* Tag pills */
+    [data-theme="light"] .tag {
+      background-color: rgba(13, 148, 136, 0.12) !important;
+      color: #0d9488 !important;
+    }
+
+    /* Card hover */
+    [data-theme="light"] .card:hover {
+      background-color: rgba(148, 163, 184, 0.15) !important;
+    }
+
+    /* Section labels */
+    [data-theme="light"] .decoration-slate-700 {
+      text-decoration-color: #cbd5e1;
+    }
+
+    /* Image borders */
+    [data-theme="light"] .border-slate-700\/50 {
+      border-color: rgba(148, 163, 184, 0.5) !important;
+    }
+
+    /* Nav lines */
+    [data-theme="light"] .nav-link {
+      color: #94a3b8 !important;
+    }
+
+    [data-theme="light"] .nav-link::before {
+      border-color: #94a3b8 !important;
+    }
+
+    [data-theme="light"] .nav-link:hover,
+    [data-theme="light"] .nav-link.active {
+      color: #0f172a !important;
+    }
+
+    [data-theme="light"] .nav-link:hover::before,
+    [data-theme="light"] .nav-link.active::before {
+      border-color: #0f172a !important;
+    }
+
+    /* GitHub links */
+    [data-theme="light"] .gh-link {
+      color: #94a3b8 !important;
+    }
+
+    [data-theme="light"] .gh-link:hover {
+      color: #0d9488 !important;
+    }
+
+    /* selection highlight */
+    ::selection {
+      background-color: rgba(100, 255, 218, 0.2);
+      color: #64ffda;
+    }
+
+    [data-theme="light"] ::selection {
+      background-color: rgba(13, 148, 136, 0.2);
+      color: #0f172a;
+    }
+
+    /* Lang toggle */
+    #lang-toggle button {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    #lang-toggle button.active-lang {
+      color: #e2e8f0;
+    }
+
+    #lang-toggle button.inactive-lang {
+      color: #475569;
+    }
+
+    #lang-toggle button.inactive-lang:hover {
+      color: #94a3b8;
+    }
+
+    /* Theme toggle button */
+    #theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      color: #64748b;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    #theme-toggle:hover {
+      color: #e2e8f0;
+    }
+
+    [data-theme="light"] #theme-toggle {
+      color: #94a3b8;
+    }
+
+    [data-theme="light"] #theme-toggle:hover {
+      color: #0f172a;
+    }
+
+    /* Lang toggle — light mode */
+    [data-theme="light"] #lang-toggle button.active-lang {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] #lang-toggle button.inactive-lang {
+      color: #94a3b8;
+    }
+
+    [data-theme="light"] #lang-toggle button.inactive-lang:hover {
+      color: #475569;
+    }
+
+    .icon-moon,
+    .icon-sun {
+      display: none;
+    }
+
+    [data-theme="dark"] .icon-moon {
+      display: block;
+    }
+
+    [data-theme="light"] .icon-sun {
+      display: block;
+    }
+
+    /* ── Grid background ─────────────────────────────────────────────────── */
+    #grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      color: #334155;
+    }
+
+    [data-theme="light"] #grid-bg {
+      color: #94a3b8;
+    }
+
+    #grid-base-layer {
+      position: absolute;
+      inset: 0;
+      opacity: 0.35;
+    }
+
+    [data-theme="light"] #grid-base-layer {
+      opacity: 0.12;
+    }
+
+    [data-theme="light"] #grid-cursor-layer {
+      opacity: 0.3;
+    }
+
+    #grid-cursor-layer {
+      position: absolute;
+      inset: 0;
+      opacity: 0.6;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    #grid-bg svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    #content-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Experience timeline ─────────────────────────────────────────────── */
+    .exp-timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0.75rem;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #334155 70%, transparent 100%);
+    }
+
+    .exp-node {
+      position: relative;
+      padding-bottom: 3.5rem;
+    }
+
+    .exp-node:last-child {
+      padding-bottom: 0;
+    }
+
+    .exp-dot {
+      position: absolute;
+      left: -3rem;
+      top: 0.1rem;
+      width: 0.875rem;
+      height: 0.875rem;
+      border-radius: 50%;
+      background: rgb(15 23 42 / var(--tw-bg-opacity, 1));
+      border: 2px solid #475569;
+      box-shadow: 0 0 0 4px #0f172a;
+      z-index: 1;
+
+    }
+
+    .exp-dot.active {
+      background: #64ffda;
+      border-color: #64ffda;
+      box-shadow: 0 0 0 4px #0f172a, 0 0 14px rgba(100, 255, 218, 0.4);
+    }
+
+    [data-theme="light"] .exp-timeline::before {
+      background: linear-gradient(to bottom, #cbd5e1 70%, transparent 100%);
+    }
+
+    [data-theme="light"] .exp-dot {
+      border-color: #cbd5e1;
+      box-shadow: 0 0 0 4px #f1f5f9;
+      background: #f1f5f9;
+    }
+
+    [data-theme="light"] .exp-dot.active {
+      background: #0d9488;
+      border-color: #0d9488;
+      box-shadow: 0 0 0 4px #f1f5f9, 0 0 14px rgba(13, 148, 136, 0.35);
+    }
+
+    [data-theme="light"] .exp-node h3,
+    [data-theme="light"] .edu-item h3 {
+      color: #1e293b;
+    }
+
+    [data-theme="light"] .cert-row {
+      color: #475569;
+    }
+
+    /* ── Education primary items ──────────────────────────────────────────── */
+    .edu-item {
+      padding: 1.75rem 0;
+      border-top: 1px solid #1e293b;
+    }
+
+    .edu-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .edu-inst {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    [data-theme="light"] .edu-item {
+      border-top-color: #e2e8f0;
+    }
+
+    /* ── Certificates compact list ────────────────────────────────────────── */
+    .cert-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+      font-size: 0.75rem;
+    }
+
+    .cert-row:last-child {
+      border-bottom: none;
+    }
+
+    [data-theme="light"] .cert-row {
+      border-bottom-color: rgba(226, 232, 240, 0.8);
+    }
+
+    /* ── Project showcase hover ────────────────────────────────────────────── */
+    #proj-preview-inner {
+      width: 280px;
+      height: 180px;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+      opacity: 0;
+      scale: 0.85;
+      transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), scale 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #proj-preview.visible #proj-preview-inner { opacity: 1; scale: 1; }
+    .proj-preview-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.08);
+      filter: blur(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+    }
+    .proj-preview-img.active { opacity: 1; transform: scale(1); filter: none; }
+    .proj-row-bg {
+      position: absolute;
+      inset: 0;
+      margin-left: -1rem;
+      margin-right: -1rem;
+      border-radius: 0.5rem;
+      background-color: rgba(30,41,59,0.5);
+      opacity: 0;
+      transform: scaleX(0.97) scaleY(0.9);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .proj-row:hover .proj-row-bg { opacity: 1; transform: scale(1); }
+    .proj-underline {
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      height: 1px;
+      background: #e2e8f0;
+      width: 0;
+      transition: width 0.3s ease;
+    }
+    .proj-row:hover .proj-underline { width: 100%; }
+    .proj-arrow {
+      width: 1rem;
+      height: 1rem;
+      color: #64748b;
+      opacity: 0;
+      transform: translateX(-8px) translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .proj-row:hover .proj-arrow { opacity: 1; transform: translateX(0) translateY(0); }
+    .proj-divider { border-top: 1px solid #1e293b; }
+    [data-theme="light"] .proj-row-bg  { background-color: rgba(148,163,184,0.12); }
+    [data-theme="light"] .proj-underline { background: #0f172a; }
+    [data-theme="light"] .proj-divider  { border-top-color: #e2e8f0; }
+
+    /* ── Spotlight card border ───────────────────────────────────────────── */
+    [data-glow]::before,
+    [data-glow]::after {
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border: 1px solid transparent;
+      border-radius: calc(0.5rem + 1px);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+      mask-clip: padding-box, border-box;
+      mask-composite: intersect;
+      -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+      -webkit-mask-clip: padding-box, border-box;
+      -webkit-mask-composite: source-in;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    [data-glow]:hover::before,
+    [data-glow]:hover::after {
+      opacity: 1;
+    }
+
+    [data-glow]::before {
+      background-image: radial-gradient(165px 165px at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+          hsl(calc(166 + var(--xp, 0.5) * 20) 100% 60% / 1),
+          transparent 100%);
+      filter: brightness(1.5);
+    }
+
+    [data-glow]::after {
+      background-image: radial-gradient(110px 110px at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+          hsl(0 0% 100% / 0.35),
+          transparent 100%);
+    }
+
+    [data-theme="light"] [data-glow]::before {
+      background-image: radial-gradient(165px 165px at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+          hsl(calc(166 + var(--xp, 0.5) * 20) 70% 35% / 0.8),
+          transparent 100%);
+      filter: brightness(1.1);
+    }
+
+    [data-theme="light"] [data-glow]::after {
+      background-image: radial-gradient(110px 110px at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+          hsl(0 0% 0% / 0.08),
+          transparent 100%);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-900 text-slate-400 leading-relaxed">
+
+  <!-- Grid background -->
+  <div id="grid-bg">
+    <div id="grid-base-layer">
+      <svg>
+        <defs>
+          <pattern id="grid-base" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid-base)" />
+      </svg>
+    </div>
+    <div id="grid-cursor-layer">
+      <svg>
+        <defs>
+          <pattern id="grid-cursor" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid-cursor)" />
+      </svg>
+    </div>
+  </div>
+
+  <div id="content-wrapper" class="max-w-screen-xl mx-auto lg:flex lg:justify-between lg:gap-4">
+
+    <!-- ===== LEFT SIDEBAR ===== -->
+    <aside class="lg:sticky lg:top-0 lg:h-screen lg:w-[45%] flex flex-col justify-between px-12 py-24 overflow-hidden">
+      <div>
+        <h1 class="text-5xl font-bold text-slate-200 tracking-tight mb-3">Eduardo Bonatto</h1>
+
+        <h2 class="text-xl font-medium text-slate-200 mb-4" data-en="Junior Developer" data-pt="Desenvolvedor Júnior">
+          Junior Developer</h2>
+
+        <p class="text-slate-400 text-sm leading-relaxed max-w-[280px]"
+          data-en="Developer focused on building real, scalable, and well-crafted digital products."
+          data-pt="Desenvolvedor focado em criar produtos digitais reais, escaláveis e bem executados.">
+          Developer focused on building real, scalable, and well-crafted digital products.
+        </p>
+
+        <nav class="mt-16 flex flex-col gap-5">
+          <a href="#about" class="nav-link" data-en="ABOUT" data-pt="SOBRE">ABOUT</a>
+          <a href="#experience" class="nav-link" data-en="EXPERIENCE" data-pt="EXPERIÊNCIA">EXPERIENCE</a>
+          <a href="#education" class="nav-link" data-en="EDUCATION" data-pt="FORMAÇÃO">EDUCATION</a>
+          <a href="#projects" class="nav-link" data-en="PROJECTS" data-pt="PROJETOS">PROJECTS</a>
+        </nav>
+
+        <!-- Theme + Language Toggle -->
+        <div class="mt-10 flex items-center gap-4">
+          <button id="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+            <!-- Moon icon (shown in dark mode) -->
+            <svg class="icon-moon w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
+                clip-rule="evenodd" />
+            </svg>
+            <!-- Sun icon (shown in light mode) -->
+            <svg class="icon-sun w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.166 17.834a.75.75 0 0 0-1.06 1.06l1.59 1.591a.75.75 0 1 0 1.061-1.06l-1.59-1.591ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.166 6.166a.75.75 0 0 0 1.06 1.06l1.591-1.59a.75.75 0 0 0-1.06-1.061L6.166 6.166Z" />
+            </svg>
+          </button>
+
+          <span class="text-slate-700 text-xs select-none">·</span>
+
+          <div id="lang-toggle" class="flex items-center gap-2">
+            <button id="btn-pt" class="inactive-lang" onclick="setLang('pt')">PT</button>
+            <span class="text-slate-600 text-xs select-none">·</span>
+            <button id="btn-en" class="active-lang" onclick="setLang('en')">EN</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Icons -->
+      <ul class="flex items-center gap-5 mt-8">
+        <li><a href="https://github.com/ebonatto" target="_blank" aria-label="GitHub"
+            class="text-slate-400 hover:text-slate-200 transition-colors block">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a></li>
+        <li><a href="https://linkedin.com/in/ebonattocosta" target="_blank" aria-label="LinkedIn"
+            class="text-slate-400 hover:text-slate-200 transition-colors block">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a></li>
+        <li><a href="https://instagram.com/e.bonatto" target="_blank" aria-label="Instagram"
+            class="text-slate-400 hover:text-slate-200 transition-colors block">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+            </svg>
+          </a></li>
+        <li><a href="mailto:ebonatto.dev@gmail.com" aria-label="Email"
+            class="text-slate-400 hover:text-slate-200 transition-colors block">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+              <path
+                d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+            </svg>
+          </a></li>
+      </ul>
+    </aside>
+
+    <!-- ===== RIGHT CONTENT ===== -->
+    <main class="lg:w-[55%] py-24 pr-12 pl-6">
+
+      <!-- ABOUT -->
+      <section id="about" class="lg:min-h-screen mb-24 scroll-mt-24 lg:flex lg:flex-col lg:justify-start">
+
+        <p class="mb-4 text-slate-400 text-base leading-7"
+          data-en="I'm a developer focused on building web and mobile applications with real impact, combining delivery speed, structured thinking, and a constant drive for technical growth. At <span class='font-medium text-slate-200'>SESI/RS</span>, I develop solutions with <span class='font-medium text-slate-200'>Bubble.io</span> and <span class='font-medium text-slate-200'>FlutterFlow</span>, as well as APIs and Cloud Functions with <span class='font-medium text-slate-200'>Python</span> and <span class='font-medium text-slate-200'>Node.js</span> integrated with Firebase. Alongside this, I've been expanding my work with <span class='font-medium text-slate-200'>Google Cloud Platform</span>, exploring the platform more broadly to support scalable applications and integrations."
+          data-pt="Sou desenvolvedor focado na construção de aplicações web e mobile com impacto real, combinando agilidade de entrega, pensamento estruturado e interesse constante por evolução técnica. No <span class='font-medium text-slate-200'>SESI/RS</span>, atuo no desenvolvimento de soluções com <span class='font-medium text-slate-200'>Bubble.io</span> e <span class='font-medium text-slate-200'>FlutterFlow</span>, além da criação de APIs e Cloud Functions com <span class='font-medium text-slate-200'>Python</span> e <span class='font-medium text-slate-200'>Node.js</span> integradas ao Firebase. Paralelamente, venho ampliando minha atuação com <span class='font-medium text-slate-200'>Google Cloud Platform</span>, explorando a plataforma de forma mais ampla para apoiar aplicações e integrações escaláveis.">
+          I'm a developer focused on building web and mobile applications with real impact, combining delivery speed,
+          structured thinking, and a constant drive for technical growth. At <span
+            class="font-medium text-slate-200">SESI/RS</span>, I develop solutions with <span
+            class="font-medium text-slate-200">Bubble.io</span> and <span
+            class="font-medium text-slate-200">FlutterFlow</span>, as well as APIs and Cloud Functions with <span
+            class="font-medium text-slate-200">Python</span> and <span class="font-medium text-slate-200">Node.js</span>
+          integrated with Firebase. Alongside this, I've been expanding my work with <span
+            class="font-medium text-slate-200">Google Cloud Platform</span>, exploring the platform more broadly to
+          support scalable applications and integrations.
+        </p>
+
+        <p class="mb-4 text-slate-400 text-base leading-7"
+          data-en="My experience brings together product development, back-end integrations, and attention to user experience — allowing me to turn ideas into functional, scalable applications aligned with business needs. I work well across disciplines, understanding requirements clearly and translating technical topics into accessible communication, which helps bridge development, product, and operations."
+          data-pt="Minha experiência reúne desenvolvimento de produto, integrações back-end e atenção à experiência do usuário, permitindo transformar ideias em aplicações funcionais, escaláveis e alinhadas às necessidades do negócio. Tenho facilidade em colaborar com profissionais de diferentes áreas, entendendo demandas com clareza e traduzindo questões técnicas em comunicação acessível, o que ajuda a aproximar desenvolvimento, produto e operação.">
+          My experience brings together product development, back-end integrations, and attention to user experience —
+          allowing me to turn ideas into functional, scalable applications aligned with business needs. I work well
+          across disciplines, understanding requirements clearly and translating technical topics into accessible
+          communication, which helps bridge development, product, and operations.
+        </p>
+
+        <p class="text-slate-400 text-base leading-7"
+          data-en="I'm looking to grow as a developer and take on increasingly challenging projects — expanding beyond low-code and contributing to innovative digital products, including in international teams and environments."
+          data-pt="Busco crescer como desenvolvedor para atuar em projetos cada vez mais desafiadores, expandindo minha atuação além do low-code e contribuindo com produtos digitais inovadores, inclusive em ambientes e equipes internacionais.">
+          I'm looking to grow as a developer and take on increasingly challenging projects — expanding beyond low-code
+          and contributing to innovative digital products, including in international teams and environments.
+        </p>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="mb-24 scroll-mt-24">
+
+
+        <div class="exp-timeline">
+
+          <!-- SESI/RS — Desenvolvedor Low-code Júnior (atual) -->
+          <div class="exp-node">
+            <div class="exp-dot active"></div>
+            <p class="text-[10px] uppercase tracking-[0.1em] text-slate-500 mb-2" data-en="Aug 2024 — Present"
+              data-pt="Ago 2024 — Presente">Aug 2024 — Present</p>
+            <h3 class="text-base font-semibold text-slate-100 mb-1 leading-snug">
+              <span data-en="Junior Low-code Developer" data-pt="Desenvolvedor Low-code Júnior">Junior Low-code
+                Developer</span>
+            </h3>
+            <a href="https://www.sesi-rs.org.br" target="_blank"
+              class="text-xs font-semibold text-teal-custom hover:opacity-75 transition-opacity mb-3 inline-block">SESI/RS
+              ↗</a>
+            <p class="text-xs text-slate-400 leading-6 mb-3"
+              data-en="Building applications with Bubble.io and FlutterFlow, creating APIs and Cloud Functions with Python and Node.js integrated with Firebase, and applying agile methodologies to support dynamic, scalable solutions."
+              data-pt="Desenvolvimento de aplicações com Bubble.io e FlutterFlow, criação de APIs e Cloud Functions com Python e Node.js integradas ao Firebase, e aplicação de metodologias ágeis para suportar soluções dinâmicas e escaláveis.">
+              Building applications with Bubble.io and FlutterFlow, creating APIs and Cloud Functions with Python and
+              Node.js integrated with Firebase, and applying agile methodologies to support dynamic, scalable solutions.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag">Bubble.io</span>
+              <span class="tag">FlutterFlow</span>
+              <span class="tag">Python</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">GCP</span>
+            </div>
+          </div>
+
+          <!-- SESI/RS — Estagiário de TI -->
+          <div class="exp-node">
+            <div class="exp-dot"></div>
+            <p class="text-[10px] uppercase tracking-[0.1em] text-slate-500 mb-2" data-en="Nov 2023 — Aug 2024"
+              data-pt="Nov 2023 — Ago 2024">Nov 2023 — Aug 2024</p>
+            <h3 class="text-base font-semibold text-slate-100 mb-1 leading-snug">
+              <span data-en="IT Intern" data-pt="Estagiário de TI">IT Intern</span>
+            </h3>
+            <a href="https://www.sesi-rs.org.br" target="_blank"
+              class="text-xs font-medium text-slate-400 hover:text-teal-custom transition-colors mb-3 inline-block">SESI/RS
+              ↗</a>
+            <p class="text-xs text-slate-400 leading-6 mb-3"
+              data-en="Development of applications using low-code platforms, including Bubble and FlutterFlow, supporting internal projects and gaining hands-on experience in the full product development cycle."
+              data-pt="Desenvolvimento de aplicações utilizando ferramentas de low-code, como Bubble e FlutterFlow, com suporte a projetos internos e experiência prática em todo o ciclo de desenvolvimento de produto.">
+              Development of applications using low-code platforms, including Bubble and FlutterFlow, supporting
+              internal projects and gaining hands-on experience in the full product development cycle.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag">Bubble.io</span>
+              <span class="tag">FlutterFlow</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="mb-24 scroll-mt-24">
+
+
+        <!-- Formações principais -->
+        <div class="mb-10">
+
+          <!-- MBA — USP/ESALQ -->
+          <div class="edu-item">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="edu-inst text-teal-custom">USP/ESALQ</span>
+              <span
+                class="text-[10px] font-semibold tracking-wide bg-teal-custom/10 text-teal-custom px-2 py-0.5 rounded-full shrink-0"
+                data-en="In progress" data-pt="Em andamento">In progress</span>
+            </div>
+            <h3 class="text-sm font-semibold text-slate-100 mb-1 leading-snug" data-en="MBA in Software Engineering"
+              data-pt="MBA em Engenharia de Software">MBA in Software Engineering</h3>
+            <p class="text-[11px] text-slate-500 mb-3" data-en="May 2025 — Present" data-pt="Maio 2025 — Presente">May
+              2025 — Present</p>
+            <p class="text-xs text-slate-400 leading-6 mb-3"
+              data-en="MBA focused on software development and management, covering systems architecture, agile methodologies, DevOps, and technical leadership — with emphasis on designing, building, and evolving scalable solutions for real-world business environments."
+              data-pt="MBA com foco em desenvolvimento e gestão de software, abordando arquitetura de sistemas, métodos ágeis, DevOps e liderança técnica — com ênfase em construção, validação e evolução de soluções escaláveis no contexto organizacional.">
+              MBA focused on software development and management, covering systems architecture, agile methodologies,
+              DevOps, and technical leadership — with emphasis on designing, building, and evolving scalable solutions
+              for real-world business environments.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag" data-en="Software Architecture" data-pt="Arquitetura de Software">Software
+                Architecture</span>
+              <span class="tag" data-en="Agile Methods" data-pt="Métodos Ágeis">Agile Methods</span>
+              <span class="tag">DevOps</span>
+              <span class="tag" data-en="Project Management" data-pt="Gestão de Projetos">Project Management</span>
+              <span class="tag" data-en="Scalable Systems" data-pt="Sistemas Escaláveis">Scalable Systems</span>
+            </div>
+          </div>
+
+          <!-- ADS — UNIRITTER -->
+          <div class="edu-item">
+            <span class="edu-inst text-slate-400 block mb-2">UNIRITTER</span>
+            <h3 class="text-sm font-semibold text-slate-100 mb-1 leading-snug"
+              data-en="Systems Analysis and Development" data-pt="Análise e Desenvolvimento de Sistemas">Systems
+              Analysis and Development</h3>
+            <p class="text-[11px] text-slate-500 mb-3" data-en="May 2023 — Dec 2025" data-pt="Mai 2023 — Dez 2025">May
+              2023 — Dec 2025</p>
+            <p class="text-xs text-slate-400 leading-6 mb-3"
+              data-en="Undergraduate degree focused on systems development, algorithms, software engineering, databases, and infrastructure — with emphasis on applied projects and real-world problem solving."
+              data-pt="Graduação com foco em desenvolvimento de sistemas, algoritmos, engenharia de software, banco de dados e infraestrutura — com ênfase em projetos aplicados e resolução de problemas reais.">
+              Undergraduate degree focused on systems development, algorithms, software engineering, databases, and
+              infrastructure — with emphasis on applied projects and real-world problem solving.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag">Algorithms</span>
+              <span class="tag" data-en="Databases" data-pt="Banco de Dados">Databases</span>
+              <span class="tag" data-en="Software Engineering" data-pt="Engenharia de Software">Software
+                Engineering</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Certificados e cursos -->
+        <div>
+          <p class="text-[10px] uppercase tracking-[0.1em] text-slate-600 mb-4" data-en="Certificates &amp; Courses"
+            data-pt="Certificados &amp; Cursos">Certificates &amp; Courses</p>
+          <ul>
+            <li class="cert-row">
+              <span class="text-slate-300 font-medium shrink-0" data-en="iOS Development"
+                data-pt="Desenvolvimento iOS">iOS Development</span>
+              <span class="text-slate-700 shrink-0">·</span>
+              <span class="text-slate-500 shrink-0">Apple Developer Academy</span>
+              <span class="text-slate-600 ml-auto shrink-0">2024</span>
+            </li>
+            <li class="cert-row">
+              <span class="text-slate-300 font-medium shrink-0">Bubble Developer Certification</span>
+              <span class="text-slate-700 shrink-0">·</span>
+              <span class="text-slate-500 shrink-0">Bubble.io</span>
+              <span class="text-slate-600 ml-auto shrink-0">2025</span>
+            </li>
+            <li class="cert-row">
+              <span class="text-slate-300 font-medium shrink-0" data-en="Java Development"
+                data-pt="Desenvolvimento Java">Java Development</span>
+              <span class="text-slate-700 shrink-0">·</span>
+              <span class="text-slate-500 shrink-0">Geração Caldeira</span>
+              <span class="text-slate-600 ml-auto shrink-0">2023</span>
+            </li>
+            <li class="cert-row">
+              <span class="text-slate-300 font-medium shrink-0">Python &amp; OOP</span>
+              <span class="text-slate-700 shrink-0">·</span>
+              <span class="text-slate-500 shrink-0">Alura</span>
+              <span class="text-slate-600 ml-auto shrink-0">2022</span>
+            </li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="mb-24 scroll-mt-24">
+
+        <!-- Floating preview -->
+        <div id="proj-preview" style="position:fixed;left:0;top:0;z-index:50;pointer-events:none;">
+          <div id="proj-preview-inner" class="relative">
+            <img class="proj-preview-img" src="proj-pomodoro.png" alt="Pomodoro Timer">
+            <img class="proj-preview-img" src="proj-portfolio-v1.png" alt="ebonatto.dev v1">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.15),transparent);"></div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Pomodoro Timer -->
+          <div class="proj-row cursor-default">
+            <div class="relative py-5 proj-divider">
+              <div class="proj-row-bg"></div>
+              <div class="relative flex items-start justify-between gap-4">
+                <div class="flex-1 min-w-0">
+                  <div class="inline-flex items-center gap-2 mb-1.5">
+                    <h3 class="text-slate-200 font-medium text-base tracking-tight">
+                      <a href="https://ebonatto.dev/pomodoro-ebonatto/" target="_blank"
+                        class="hover:text-teal-custom transition-colors">
+                        <span class="relative">
+                          Pomodoro Timer
+                          <span class="proj-underline"></span>
+                        </span>
+                      </a>
+                    </h3>
+                    <svg class="proj-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                    </svg>
+                  </div>
+                  <p class="text-sm text-slate-400 leading-relaxed mb-3"
+                    data-en="A minimalist productivity timer implementing the Pomodoro technique. Features customizable block durations and color-themed options to help maintain focus and manage work sessions effectively."
+                    data-pt="Um timer de produtividade minimalista que implementa a técnica Pomodoro. Possui durações de blocos customizáveis e opções de temas coloridos para ajudar a manter o foco e gerenciar as sessões de trabalho com eficiência.">
+                    A minimalist productivity timer implementing the Pomodoro technique. Features customizable block
+                    durations and color-themed options to help maintain focus and manage work sessions effectively.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-2">
+                    <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                  </div>
+                  <a href="https://github.com/ebonatto/pomodoro-ebonatto" target="_blank" class="gh-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5">
+                      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    ebonatto/pomodoro-ebonatto
+                  </a>
+                </div>
+                <span class="text-xs font-mono text-slate-500 tabular-nums shrink-0 mt-1">2024</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ebonatto.dev v1 -->
+          <div class="proj-row cursor-default">
+            <div class="relative py-5 proj-divider">
+              <div class="proj-row-bg"></div>
+              <div class="relative flex items-start justify-between gap-4">
+                <div class="flex-1 min-w-0">
+                  <div class="inline-flex items-center gap-2 mb-1.5">
+                    <h3 class="text-slate-200 font-medium text-base tracking-tight">
+                      <a href="https://github.com/ebonatto/ebonatto-dev-v1" target="_blank"
+                        class="hover:text-teal-custom transition-colors">
+                        <span class="relative">
+                          ebonatto.dev (v1)
+                          <span class="proj-underline"></span>
+                        </span>
+                      </a>
+                    </h3>
+                    <svg class="proj-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                    </svg>
+                  </div>
+                  <p class="text-sm text-slate-400 leading-relaxed mb-3"
+                    data-en="Previous version of this portfolio — a personal presentation site built with pure HTML and CSS. It was my first public-facing project that combined front-end skills with personal branding."
+                    data-pt="Versão anterior deste portfólio — um site de apresentação pessoal construído com HTML e CSS puro. Foi meu primeiro projeto público que combinou habilidades de front-end com identidade pessoal.">
+                    Previous version of this portfolio — a personal presentation site built with pure HTML and CSS. It
+                    was my first public-facing project that combined front-end skills with personal branding.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-2">
+                    <span class="tag">HTML</span><span class="tag">CSS</span>
+                  </div>
+                  <a href="https://github.com/ebonatto/ebonatto-dev-v1" target="_blank" class="gh-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5">
+                      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    ebonatto/ebonatto-dev-v1
+                  </a>
+                </div>
+                <span class="text-xs font-mono text-slate-500 tabular-nums shrink-0 mt-1">2023</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-divider"></div>
+        </div>
+
+        <!-- View All on GitHub -->
+        <div class="mt-10">
+          <a href="https://github.com/ebonatto" target="_blank"
+            class="inline-flex items-center gap-1 font-semibold text-slate-200 hover:text-teal-custom transition-colors text-sm group">
+            <span data-en="View All on GitHub" data-pt="Ver Tudo no GitHub">View All on GitHub</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              class="w-4 h-4 group-hover:translate-x-1 transition-transform">
+              <path fill-rule="evenodd"
+                d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"
+                clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="text-xs text-slate-600 leading-relaxed pb-12">
+        <p data-en='Inspired by <a href="https://brittanychiang.com" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">brittanychiang.com</a>. Coded in <a href="https://code.visualstudio.com" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Visual Studio Code</a>. Built with <a href="https://tailwindcss.com" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Tailwind CSS</a>. All text is set in the <a href="https://rsms.me/inter/" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Inter</a> typeface.'
+          data-pt='Inspirado por <a href="https://brittanychiang.com" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">brittanychiang.com</a>. Codificado no <a href="https://code.visualstudio.com" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Visual Studio Code</a>. Construído com <a href="https://tailwindcss.com" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Tailwind CSS</a>. Todo o texto usa a tipografia <a href="https://rsms.me/inter/" target="_blank" class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Inter</a>.'>
+          Inspired by <a href="https://brittanychiang.com" target="_blank"
+            class="text-slate-500 hover:text-teal-custom transition-colors font-medium">brittanychiang.com</a>. Coded in
+          <a href="https://code.visualstudio.com" target="_blank"
+            class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Visual Studio Code</a>. Built
+          with <a href="https://tailwindcss.com" target="_blank"
+            class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Tailwind CSS</a>. All text is
+          set in the <a href="https://rsms.me/inter/" target="_blank"
+            class="text-slate-500 hover:text-teal-custom transition-colors font-medium">Inter</a> typeface.
+        </p>
+      </footer>
+
+    </main>
+  </div><!-- #content-wrapper -->
+
+  <script>
+    // ── Theme toggle ────────────────────────────────────────────────────────
+    const THEME_KEY = 'theme';
+    const html = document.getElementById('html-root');
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem(THEME_KEY, theme);
+    }
+
+    function toggleTheme() {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+
+    // Load saved theme (default: dark)
+    applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+
+    // ── Language toggle ──────────────────────────────────────────────────────
+    const STORAGE_KEY = 'lang';
+    let currentLang = localStorage.getItem(STORAGE_KEY) || 'pt';
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem(STORAGE_KEY, lang);
+
+      // Update html[lang]
+      document.getElementById('html-root').lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+      // Swap all translatable elements
+      document.querySelectorAll('[data-en][data-pt]').forEach(el => {
+        const value = lang === 'pt' ? el.dataset.pt : el.dataset.en;
+        // Use innerHTML only for elements that may contain HTML tags
+        if (value.includes('<')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+
+      // Update toggle button states
+      document.getElementById('btn-en').className = lang === 'en' ? 'active-lang' : 'inactive-lang';
+      document.getElementById('btn-pt').className = lang === 'pt' ? 'active-lang' : 'inactive-lang';
+
+    }
+
+    // Apply stored preference on load
+    setLang(currentLang);
+
+    // ── Scroll-spy ───────────────────────────────────────────────────────────
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActiveNav(entry.target.id);
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // ── Grid background ───────────────────────────────────────────────────
+    const basePattern = document.getElementById('grid-base');
+    const cursorPattern = document.getElementById('grid-cursor');
+    const cursorLayer = document.getElementById('grid-cursor-layer');
+    let gx = 0, gy = 0;
+
+    (function tick() {
+      gx = (gx + 0.1) % 40;
+      gy = (gy + 0.1) % 40;
+      basePattern.setAttribute('x', gx);
+      basePattern.setAttribute('y', gy);
+      cursorPattern.setAttribute('x', gx);
+      cursorPattern.setAttribute('y', gy);
+      requestAnimationFrame(tick);
+    })();
+
+    document.addEventListener('pointermove', e => {
+      document.documentElement.style.setProperty('--x', e.clientX);
+      document.documentElement.style.setProperty('--y', e.clientY);
+      document.documentElement.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(3));
+      const mask = `radial-gradient(280px circle at ${e.clientX}px ${e.clientY}px, black, transparent)`;
+      cursorLayer.style.maskImage = mask;
+      cursorLayer.style.webkitMaskImage = mask;
+    });
+
+    // Apply spotlight border to all cards
+    document.querySelectorAll('.card').forEach(c => c.setAttribute('data-glow', ''));
+
+    // Project showcase hover preview
+    (function () {
+      const preview = document.getElementById('proj-preview');
+      if (!preview) return;
+      const imgs = preview.querySelectorAll('.proj-preview-img');
+      const rows = document.querySelectorAll('.proj-row');
+
+      let targetX = 0, targetY = 0, smoothX = 0, smoothY = 0;
+      function lerpV(a, b, t) { return a + (b - a) * t; }
+
+      (function tick() {
+        smoothX = lerpV(smoothX, targetX, 0.15);
+        smoothY = lerpV(smoothY, targetY, 0.15);
+        preview.style.transform = 'translate3d(' + (smoothX + 20) + 'px,' + (smoothY - 110) + 'px,0)';
+        requestAnimationFrame(tick);
+      })();
+
+      document.addEventListener('pointermove', function (e) {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      });
+
+      rows.forEach(function (row, idx) {
+        row.addEventListener('mouseenter', function () {
+          preview.classList.add('visible');
+          imgs.forEach(function (img, i) { img.classList.toggle('active', i === idx); });
+        });
+        row.addEventListener('mouseleave', function () {
+          preview.classList.remove('visible');
+        });
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
