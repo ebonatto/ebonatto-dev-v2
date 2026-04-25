@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root" data-theme="dark">
+<html lang="pt-BR" id="html-root" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eduardo Bonatto — Developer</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#8fa3ff">
+  <meta name="msapplication-TileImage" content="mstile-150x150.png">
+  <meta name="msapplication-TileColor" content="#231929">
+  <meta name="theme-color" content="#231929">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -491,6 +498,10 @@
       filter: none;
     }
 
+    @media (hover: none) {
+      #proj-preview { display: none !important; }
+    }
+
     .proj-row-bg {
       position: absolute;
       inset: 0;
@@ -675,9 +686,9 @@
           <span class="text-slate-700 text-xs select-none">·</span>
 
           <div id="lang-toggle" class="flex items-center gap-2">
-            <button id="btn-pt" class="inactive-lang" onclick="setLang('pt')">PT</button>
+            <button id="btn-pt" class="active-lang" onclick="setLang('pt')">PT</button>
             <span class="text-slate-600 text-xs select-none">·</span>
-            <button id="btn-en" class="active-lang" onclick="setLang('en')">EN</button>
+            <button id="btn-en" class="inactive-lang" onclick="setLang('en')">EN</button>
           </div>
         </div>
       </div>
