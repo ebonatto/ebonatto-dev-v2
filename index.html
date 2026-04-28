@@ -455,6 +455,20 @@
       font-size: 0.75rem;
     }
 
+    @media (max-width: 640px) {
+      .cert-row {
+        flex-wrap: wrap;
+        align-items: center;
+        row-gap: 0.1rem;
+      }
+      .cert-row span:first-child {
+        flex-basis: 100%;
+      }
+      .cert-row span:nth-child(2) {
+        display: none;
+      }
+    }
+
     .cert-row:last-child {
       border-bottom: none;
     }
@@ -731,7 +745,7 @@
     <main class="lg:w-[55%] py-24 pr-12 pl-6">
 
       <!-- ABOUT -->
-      <section id="about" class="lg:min-h-screen mb-24 scroll-mt-24 lg:flex lg:flex-col lg:justify-start">
+      <section id="about" class="mb-24 scroll-mt-24">
 
         <p class="mb-4 text-slate-400 text-base leading-7"
           data-en="I'm a developer focused on building web and mobile applications with real impact, combining delivery speed, structured thinking, and a constant drive for technical growth. At <span class='font-medium text-slate-200'>SESI/RS</span>, I develop solutions with <span class='font-medium text-slate-200'>Bubble.io</span> and <span class='font-medium text-slate-200'>FlutterFlow</span>, as well as APIs and Cloud Functions with <span class='font-medium text-slate-200'>Python</span> and <span class='font-medium text-slate-200'>Node.js</span> integrated with Firebase. Alongside this, I've been expanding my work with <span class='font-medium text-slate-200'>Google Cloud Platform</span>, exploring the platform more broadly to support scalable applications and integrations."
